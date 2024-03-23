@@ -4,7 +4,7 @@ import ReactFlow, { addEdge, useEdgesState, useNodesState } from 'reactflow';
 import 'reactflow/dist/style.css';
 import NumberNode from '../components/nodes/NumberNode.jsx';
 import ResultNode from '../components/nodes/ResultNode.jsx';
-import Sidebar from '../components/sidebar.jsx';
+import Sidebar from '../components/Sidebar.jsx';
 
 const initialNodes = [
   {
