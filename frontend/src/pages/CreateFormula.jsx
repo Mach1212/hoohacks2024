@@ -12,6 +12,7 @@ import 'reactflow/dist/style.css';
 // import TextUpdaterNode from './TextUpdaterNode.jsx';
 import FormulaNode from '../components/nodes/FormulaNode.jsx';
 import CalculateNode from '../components/nodes/CalculateNode.jsx';
+import OperationNode from '../components/nodes/OperationNode.jsx';
 
 import './text-updater-node.css';
 
@@ -21,15 +22,21 @@ const rfStyle = {
 
 const initialNodes = [
   {
-    id: 'node-1',
+    id: 'formula-node-1',
     type: 'formulaNode',
     position: { x: 0, y: 0 },
     data: { value: 123 },
   },
   {
-    id: 'node-2',
+    id: 'formula-node-2',
     type: 'formulaNode',
     position: { x: 0, y: 100 },
+    data: { value: 123 },
+  },
+  {
+    id: 'operation-node-1',
+    type: 'operationNode',
+    position: { x: 0, y: 200 },
     data: { value: 123 },
   },
   {
@@ -46,7 +53,7 @@ const initialEdges = [
 ];
 
 const isValidConnection = (connection) => (
-  connection.target === 'calculate-node'
+  connection.source.type === 'formulaNode' && connection.target.type === 'calculateNode'
 );
 // const onConnectStart = (_, { nodeId, handleType }) =>
 //   console.log('on connect start', { nodeId, handleType });
@@ -57,6 +64,7 @@ const isValidConnection = (connection) => (
 const nodeTypes = {
   // textUpdater: TextUpdaterNode,
   formulaNode: FormulaNode,
+  operationNode: OperationNode,
   calculateNode: CalculateNode,
 };
 
@@ -74,9 +82,7 @@ export default function Formula() {
   );
   const onConnect = useCallback(
     (connection) => {
-      setEdges((eds) => {
-        addEdge(connection, eds);
-      });
+      setEdges((eds) => addEdge(connection, eds));
       console.log(connection);
     },
     [setEdges],
