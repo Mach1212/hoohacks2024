@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge } from 'reactflow';
 
 import 'reactflow/dist/style.css';
-import NumberNode from '../components/Nodes/NumberNode.jsx';
-import ResultNode from '../components/Nodes/ResultNode.jsx';
+import NumberNode from '../components/nodes/NumberNode.jsx';
+import ResultNode from '../components/nodes/ResultNode.jsx';
 
 
 
