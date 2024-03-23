@@ -1,8 +1,12 @@
 import { useCallback, useState } from 'react';
-import ReactFlow, { addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow';
+import ReactFlow, {
+    addEdge,
+    applyEdgeChanges,
+    applyNodeChanges,
+} from 'reactflow';
 import 'reactflow/dist/style.css';
 
-import TextUpdaterNode from '../components/Nodes/TextUpdaterNode.jsx';
+import TextUpdaterNode from '../components/nodes/TextUpdaterNode.jsx';
 
 import './text-updater-node.css';
 
@@ -11,7 +15,12 @@ const rfStyle = {
 };
 
 const initialNodes = [
-    { id: 'node-1', type: 'textUpdater', position: { x: 0, y: 0 }, data: { value: 123 } },
+    {
+        id: 'node-1',
+        type: 'textUpdater',
+        position: { x: 0, y: 0 },
+        data: { value: 123 },
+    },
 ];
 
 const initialEdges = [
@@ -29,15 +38,15 @@ function Flow() {
 
     const onNodesChange = useCallback(
         (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-        [setNodes]
+        [setNodes],
     );
     const onEdgesChange = useCallback(
         (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-        [setEdges]
+        [setEdges],
     );
     const onConnect = useCallback(
         (connection) => setEdges((eds) => addEdge(connection, eds)),
-        [setEdges]
+        [setEdges],
     );
 
     return (
