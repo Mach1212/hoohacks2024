@@ -1,15 +1,26 @@
 import React, { useCallback } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, addEdge } from 'reactflow';
+import ReactFlow, { addEdge, useEdgesState, useNodesState } from 'reactflow';
 
 import 'reactflow/dist/style.css';
-import NumberNode from '../components/nodes/NumberNode.jsx';
-import ResultNode from '../components/nodes/ResultNode.jsx';
-
-
+import NumberNode from '../components/Nodes/NumberNode.jsx';
+import ResultNode from '../components/Nodes/ResultNode.jsx';
+import Sidebar from '../components/sidebar.jsx';
 
 const initialNodes = [
-  { id: '1', type: 'number', label: '1', position: { x: 0, y: 0 }, data: { label: 'ee er'},},
-  { id: '2', type: 'result', label: '2', position: { x: 200, y: 0 }, data: { label: 'I hate this'},  },
+  {
+    id: '1',
+    type: 'number',
+    label: '1',
+    position: { x: 0, y: 0 },
+    data: { label: 'ee er' },
+  },
+  {
+    id: '2',
+    type: 'result',
+    label: '2',
+    position: { x: 200, y: 0 },
+    data: { label: 'I hate this' },
+  },
 ];
 
 const nodeTypes = {
@@ -29,15 +40,18 @@ export default function Calculator() {
   );
 
   return (
-    <div style={{width: '100vw', height: '100vh'}}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        nodeTypes={nodeTypes}
-      />
-    </div>
+    <main className='flex flex-row'>
+      <Sidebar />
+      <div style={{ width: '100vw', height: '100vh' }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          nodeTypes={nodeTypes}
+        />
+      </div>
+    </main>
   );
 }
