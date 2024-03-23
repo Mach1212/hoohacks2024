@@ -7,7 +7,7 @@ export default function FormulaNode({ data, isConnectable }) {
   const onChange = useCallback((evt) => {
     // console.log(evt.target.value);
     data.value = evt.target.value;
-    console.log(data.value);
+    // console.log(data.value);
   }, []);
 
   return (

@@ -24,7 +24,7 @@ export default function FormulaNode({ data, isConnectable }) {
         // style={handleStyle}
         isConnectable={isConnectable}
       />
-      <Handle type="source" position={Position.Right} id="b" isConnectable={isConnectable} />
+      {/* <Handle type="source" position={Position.Right} id="b" isConnectable={isConnectable} /> */}
     </div>
   );
 }

@@ -35,7 +35,7 @@ const initialNodes = [
   {
     id: 'calculate-node',
     type: 'calculateNode',
-    position: { x: 200, y: 100 },
+    position: { x: 400, y: 50 },
     data: { value: 123 },
   },
 ];
@@ -45,8 +45,9 @@ const initialEdges = [
   // { id: 'edge-2', source: 'node-1', target: 'node-3', sourceHandle: 'b' },
 ];
 
-const isValidConnection = (connection) =>
-  connection.target === 'calculate-node';
+const isValidConnection = (connection) => (
+  connection.target === 'calculate-node'
+);
 // const onConnectStart = (_, { nodeId, handleType }) =>
 //   console.log('on connect start', { nodeId, handleType });
 // const onConnectEnd = (event) => console.log('on connect end', event);
@@ -75,10 +76,8 @@ export default function Formula() {
     (connection) => {
       setEdges((eds) => {
         addEdge(connection, eds);
-        console.log(eds);
       });
       console.log(connection);
-      col;
     },
     [setEdges],
   );
