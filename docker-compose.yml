@@ -1,0 +1,45 @@
+# version: '3'
+
+services:
+  frontend:
+    build:
+      context: frontend
+    env_file: .env
+    ports:
+      - ${FRONTEND_PORT:?error}:$FRONTEND_PORT
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /app
+        - action: rebuild
+          path: ./frontend/package.json
+
+  backend:
+    build:
+      context: backend
+    env_file: .env
+    ports:
+      - ${BACKEND_PORT:?error}:$BACKEND_PORT
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend
+    restart: always
+
+  database:
+    image: surrealdb/surrealdb:latest
+    ports:
+      - ${DB_PORT:?error}:$DB_PORT
+    entrypoint:
+      - /surreal
+      - start
+      - --user
+      - ${DB_USER:?error}
+      - --pass
+      - ${DB_PASSWORD:?error}
+      - --bind
+      - 0.0.0.0:$DB_PORT
+      - --log
+      - ${DB_LOG_LEVEL:-info}
+    # stop_signal: SIGKILL
