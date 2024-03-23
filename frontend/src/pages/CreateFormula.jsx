@@ -10,8 +10,8 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 
 // import TextUpdaterNode from './TextUpdaterNode.jsx';
-import FormulaNode from '../components/Nodes/FormulaNode.jsx';
-import CalculateNode from '../components/Nodes/CalculateNode.jsx';
+import FormulaNode from './FormulaNode.jsx';
+import CalculateNode from './CalculateNode.jsx';
 
 import './text-updater-node.css';
 
@@ -21,7 +21,7 @@ const rfStyle = {
 
 const initialNodes = [
     { id: 'node-1', type: 'formulaNode', position: { x: 0, y: 0 }, data: { value: 123 } },
-    { id: 'node-2', type: 'formulaNode', position: { x: 100, y: 100 }, data: { value: 123 } },
+    { id: 'node-2', type: 'formulaNode', position: { x: 0, y: 100 }, data: { value: 123 } },
     { id: 'calculate-node', type: 'calculateNode', position: { x: 200, y: 100 }, data: { value: 123 } },
 ];
 
@@ -57,9 +57,8 @@ export default function Formula() {
     );
     const onConnect = useCallback(
         (connection) => {
-            setEdges((eds) => {addEdge(connection, eds); console.log(eds);});
+            setEdges((eds) => addEdge(connection, eds));
             console.log(connection);
-            col
         },
         [setEdges]
     );
