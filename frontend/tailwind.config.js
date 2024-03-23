@@ -7,7 +7,7 @@ export default {
       primary: '#757575',
       accent: '#ffcd29',
       text: '#233128',
-      background: '#e6e6e6',
+      background: '#ffcd29',
     },
   },
   plugins: [],
