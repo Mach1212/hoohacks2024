@@ -20,11 +20,11 @@ export default function FormulaNode({ data, isConnectable }) {
       <Handle
         type="target"
         position={Position.Left}
-        id="a"
+        id="formula-in"
         // style={handleStyle}
         isConnectable={isConnectable}
       />
-      <Handle type="source" position={Position.Right} id="b" isConnectable={isConnectable} />
+      <Handle type="source" position={Position.Right} id="formula-out" isConnectable={isConnectable} />
     </div>
   );
 }

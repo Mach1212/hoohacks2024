@@ -20,11 +20,11 @@ export default function operationNode({ data, isConnectable }) {
       <Handle
         type="target"
         position={Position.Left}
-        id="a"
+        id="operation-in"
         // style={handleStyle}
         isConnectable={isConnectable}
       />
-      <Handle type="source" position={Position.Right} id="b" isConnectable={isConnectable} />
+      <Handle type="source" position={Position.Right} id="operation-out" isConnectable={isConnectable} />
     </div>
   );
 }

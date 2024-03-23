@@ -3,7 +3,7 @@ import { Handle, Position } from 'reactflow';
 
 const handleStyle = { left: 10 };
 
-export default function FormulaNode({ data, isConnectable }) {
+export default function CalculateNode({ data, isConnectable }) {
   const onChange = useCallback((evt) => {
     // console.log(evt.target.value);
     data.value = evt.target.value;
@@ -15,12 +15,12 @@ export default function FormulaNode({ data, isConnectable }) {
       {/* <Handle type="target" position={Position.Top} isConnectable={isConnectable} /> */}
       <div>
         <label htmlFor="text">Calculate</label>
-        <input id="text" name="text" onChange={onChange} className="nodrag" />
+        {/* <input id="text" name="text" onChange={onChange} className="nodrag" /> */}
       </div>
       <Handle
         type="target"
         position={Position.Left}
-        id="a"
+        id="calculation"
         // style={handleStyle}
         isConnectable={isConnectable}
       />

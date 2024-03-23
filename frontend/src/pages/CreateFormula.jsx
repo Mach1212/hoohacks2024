@@ -28,14 +28,14 @@ const initialNodes = [
     data: { value: 123 },
   },
   {
-    id: 'formula-node-2',
-    type: 'formulaNode',
-    position: { x: 0, y: 100 },
+    id: 'operation-node-1',
+    type: 'operationNode',
+    position: { x: 50, y: 100 },
     data: { value: 123 },
   },
   {
-    id: 'operation-node-1',
-    type: 'operationNode',
+    id: 'formula-node-2',
+    type: 'formulaNode',
     position: { x: 0, y: 200 },
     data: { value: 123 },
   },
@@ -53,8 +53,10 @@ const initialEdges = [
 ];
 
 const isValidConnection = (connection) => (
-  connection.source.type === 'formulaNode' && connection.target.type === 'calculateNode'
-);
+  (connection.sourceHandle === 'formula-out' && connection.targetHandle === 'calculation') ||
+  (connection.sourceHandle === 'formula-out' && connection.targetHandle === 'operation-in') ||
+  (connection.sourceHandle === 'operation-out' && connection.targetHandle === 'formula-in')
+)
 // const onConnectStart = (_, { nodeId, handleType }) =>
 //   console.log('on connect start', { nodeId, handleType });
 // const onConnectEnd = (event) => console.log('on connect end', event);
@@ -84,6 +86,7 @@ export default function Formula() {
     (connection) => {
       setEdges((eds) => addEdge(connection, eds));
       console.log(connection);
+      console.log(initialNodes.find(node => node.id === connection.source).data.value);
     },
     [setEdges],
   );
