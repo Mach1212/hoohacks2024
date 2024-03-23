@@ -10,8 +10,8 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 
 // import TextUpdaterNode from './TextUpdaterNode.jsx';
-import FormulaNode from './FormulaNode.jsx';
-import CalculateNode from './CalculateNode.jsx';
+import FormulaNode from '../components/Nodes/FormulaNode.jsx';
+import CalculateNode from '../components/Nodes/CalculateNode.jsx';
 
 import './text-updater-node.css';
 

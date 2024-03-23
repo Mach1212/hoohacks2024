@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import ReactFlow, { addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-import TextUpdaterNode from './TextUpdaterNode.jsx';
+import TextUpdaterNode from '../components/Nodes/TextUpdaterNode.jsx';
 
 import './text-updater-node.css';
 
