@@ -7,7 +7,7 @@ import Formula from './CreateFormula.jsx';
 
 export default function App() {
   return (
-    <div className='px-2'>
+    <div className='bg-[background] w-screen h-screen'>
       <Routes>
         <Route path='/' element={<Navigate to='/overview' />} />
         <Route path='/overview' element={<Overview />} />
