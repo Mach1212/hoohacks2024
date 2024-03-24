@@ -7,6 +7,8 @@ import ReactFlow, {
   Controls,
   MiniMap,
 } from 'reactflow';
+import { IconButton } from '@mui/material';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import 'reactflow/dist/style.css';
 
 // import TextUpdaterNode from './TextUpdaterNode.jsx';
@@ -43,7 +45,7 @@ const initialNodes = [
     id: 'calculate-node',
     type: 'calculateNode',
     position: { x: 400, y: 50 },
-    data: { value: 123 },
+    data: { value: "No Input Yet" },
   },
 ];
 
@@ -70,6 +72,14 @@ const nodeTypes = {
   calculateNode: CalculateNode,
 };
 
+const handleClick = () => {
+  // console.log(initialNodes.find(node => node.id === connection.source).data.value);
+  console.log(initialNodes.find(node => node.id === 'calculate-node'));
+  document.getElementById('calculate-result').innerHTML = 
+    initialNodes.find(node => node.id === 'calculate-node').data.value;
+  
+}
+
 export default function Formula() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
@@ -86,13 +96,16 @@ export default function Formula() {
     (connection) => {
       setEdges((eds) => addEdge(connection, eds));
       console.log(connection);
-      console.log(initialNodes.find(node => node.id === connection.source).data.value);
+      // console.log(initialNodes.find(node => node.id === connection.source).data.value);
     },
     [setEdges],
   );
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
+      <IconButton className='bg-white rounded' onClick={handleClick}>
+        <PlayArrowIcon />
+      </IconButton>
       <ReactFlow
         nodes={nodes}
         edges={edges}

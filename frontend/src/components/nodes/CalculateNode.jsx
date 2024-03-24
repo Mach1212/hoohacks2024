@@ -7,7 +7,7 @@ export default function CalculateNode({ data, isConnectable }) {
   const onChange = useCallback((evt) => {
     // console.log(evt.target.value);
     data.value = evt.target.value;
-    console.log(data.value);
+    // console.log(data.value);
   }, []);
 
   return (
@@ -16,6 +16,7 @@ export default function CalculateNode({ data, isConnectable }) {
       <div>
         <label htmlFor="text">Calculate</label>
         {/* <input id="text" name="text" onChange={onChange} className="nodrag" /> */}
+        <span id="calculate-result"></span>
       </div>
       <Handle
         type="target"
