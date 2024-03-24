@@ -6,10 +6,7 @@ import ReactFlow, {
   Background,
   Controls,
   MiniMap,
-  useEdges,
   getConnectedEdges,
-  useNodes,
-  ReactFlowProvider,
 } from 'reactflow';
 import { IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -78,13 +75,9 @@ const nodeTypes = {
   calculateNode: CalculateNode,
 };
 
-
-
 export default function Formula() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
-
-
 
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -102,14 +95,39 @@ export default function Formula() {
     },
     [setEdges],
   );
+
+  const callOtherFunction = (n, e) => {
+    // console.log(n);
+    // console.log(e);
+    // console.log(getConnectedEdges(n, e));
+    // for (let i = getConnectedEdges(n, e).length - 1; i >= 0; i--) {
+    var node_values = [];
+    for (let i = 0; i < getConnectedEdges(n, e).length; i++) {
+      node_values.push(n.find(node => node.id === getConnectedEdges(n, e)[i].source).data.value.trim());
+      // console.log(n.find(node => node.id === getConnectedEdges(n, e)[i].source).data.value);
+    }
+    // console.log(node_values);
+    // console.log(node_values.join(' '));
+    return node_values.join(' ');
+  }
+
   const handleClick = () => {
     // console.log(initialNodes.find(node => node.id === connection.source).data.value);
     //console.log(initialNodes.find(node => node.id === 'calculate-node'));
+    const mathString = callOtherFunction(nodes, edges);
+    console.log(mathString);
+
+    // DO MATH HERE WITH THE mathString
+    
+
+    // set the calculate result to the result of the math
+    initialNodes.find(node => node.id === 'calculate-node').data.value = mathString;
+
     document.getElementById('calculate-result').innerHTML =
         initialNodes.find(node => node.id === 'calculate-node').data.value;
-    const connectedEdges = getConnectedEdges(useNodes(), useEdges());
-    console.log(connectedEdges);
-
+    // console.log(allN);
+    // const connectedEdges = getConnectedEdges(useNodes(), useEdges());
+    // console.log(connectedEdges);
   }
 
   return (
