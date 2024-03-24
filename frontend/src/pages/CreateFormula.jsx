@@ -6,6 +6,10 @@ import ReactFlow, {
   Background,
   Controls,
   MiniMap,
+  useEdges,
+  getConnectedEdges,
+  useNodes,
+  ReactFlowProvider,
 } from 'reactflow';
 import { IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -54,6 +58,8 @@ const initialEdges = [
   // { id: 'edge-2', source: 'node-1', target: 'node-3', sourceHandle: 'b' },
 ];
 
+
+
 const isValidConnection = (connection) => (
   (connection.sourceHandle === 'formula-out' && connection.targetHandle === 'calculation') ||
   (connection.sourceHandle === 'formula-out' && connection.targetHandle === 'operation-in') ||
@@ -72,17 +78,13 @@ const nodeTypes = {
   calculateNode: CalculateNode,
 };
 
-const handleClick = () => {
-  // console.log(initialNodes.find(node => node.id === connection.source).data.value);
-  console.log(initialNodes.find(node => node.id === 'calculate-node'));
-  document.getElementById('calculate-result').innerHTML = 
-    initialNodes.find(node => node.id === 'calculate-node').data.value;
-  
-}
+
 
 export default function Formula() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
+
+
 
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -95,11 +97,20 @@ export default function Formula() {
   const onConnect = useCallback(
     (connection) => {
       setEdges((eds) => addEdge(connection, eds));
-      console.log(connection);
+      //console.log(connection);
       // console.log(initialNodes.find(node => node.id === connection.source).data.value);
     },
     [setEdges],
   );
+  const handleClick = () => {
+    // console.log(initialNodes.find(node => node.id === connection.source).data.value);
+    //console.log(initialNodes.find(node => node.id === 'calculate-node'));
+    document.getElementById('calculate-result').innerHTML =
+        initialNodes.find(node => node.id === 'calculate-node').data.value;
+    const connectedEdges = getConnectedEdges(useNodes(), useEdges());
+    console.log(connectedEdges);
+
+  }
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
