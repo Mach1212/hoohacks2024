@@ -14,7 +14,7 @@ export default function FormulaNode({ data, isConnectable }) {
     <div className="text-updater-node">
       {/* <Handle type="target" position={Position.Top} isConnectable={isConnectable} /> */}
       <div>
-        <label htmlFor="text">Please input one part of your problem</label>
+        <label htmlFor="text">Enter a number</label>
         <input id="text" name="text" onChange={onChange} className="nodrag" />
       </div>
       <Handle

@@ -9,8 +9,18 @@ import { useEdgesState, useNodesState } from 'reactflow';
 const functions = [
   { name: 'sin', type: 'formulaNode', mathJsInfo: 'sin(first)' },
   {
-    name: 'Cos',
+    name: 'cos',
     type: 'formulaNode',
+    mathJsInfo: 'cos($1)',
+  },
+  {
+    name: 'number',
+    type: 'formulaNode',
+    mathJsInfo: 'cos($1)',
+  },
+  {
+    name: 'operation',
+    type: 'operationNode',
     mathJsInfo: 'cos($1)',
   },
 ];

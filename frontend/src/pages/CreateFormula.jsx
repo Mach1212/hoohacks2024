@@ -46,7 +46,7 @@ const initialNodes = [
     id: 'calculate-node',
     type: 'calculateNode',
     position: { x: 400, y: 50 },
-    data: { value: "No Input Yet" },
+    data: { value: "No Input Yet", hasConnection: false },
   },
 ];
 
@@ -89,8 +89,11 @@ export default function Formula() {
   );
   const onConnect = useCallback(
     (connection) => {
+      // console.log(connection);
       setEdges((eds) => addEdge(connection, eds));
-      //console.log(connection);
+
+
+
       // console.log(initialNodes.find(node => node.id === connection.source).data.value);
     },
     [setEdges],
@@ -114,8 +117,9 @@ export default function Formula() {
   const handleClick = () => {
     // console.log(initialNodes.find(node => node.id === connection.source).data.value);
     //console.log(initialNodes.find(node => node.id === 'calculate-node'));
-    const mathString = callOtherFunction(nodes, edges);
     console.log(mathString);
+
+    const mathString = callOtherFunction(nodes, edges);
 
     // DO MATH HERE WITH THE mathString
     
