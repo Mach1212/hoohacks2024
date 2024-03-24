@@ -7,18 +7,22 @@ import { Option } from '@mui/base/Option';
 import { useEdgesState, useNodesState } from 'reactflow';
 
 const functions = [
-  { name: 'sin', type: 'number', value: '1' },
+  { name: 'sin', type: 'formulaNode', mathJsInfo: 'sin(first)' },
   {
-    name: 'cos',
-    type: 'function',
-    func: 'cos()',
+    name: 'Cos',
+    type: 'formulaNode',
+    mathJsInfo: 'cos($1)',
   },
 ];
 
 export default function Sidebar({ handlePlay }) {
-  const onDragStart = (event, nodeType) => {
-    console.log(nodeType);
-    event.dataTransfer.setData('application/reactflow', nodeType);
+  const onDragStart = (event, nodeData) => {
+    event.dataTransfer.setData('application/reactflow.nodeType', nodeData.type);
+    event.dataTransfer.setData('application/reactflow.name', nodeData.name);
+    event.dataTransfer.setData(
+      'application/reactflow.mathJsInfo',
+      nodeData.mathJsInfo,
+    );
     event.dataTransfer.effectAllowed = 'move';
   };
 
@@ -47,7 +51,7 @@ export default function Sidebar({ handlePlay }) {
             key={data.name}
             variant='body1'
             className='bg-white rounded w-full text-center py-4'
-            onDragStart={(event) => onDragStart(event, data.name)}
+            onDragStart={(event) => onDragStart(event, data)}
             draggable>
             {data.name}
           </Typography>

@@ -6,6 +6,7 @@ import ReactFlow, {
   Background,
   Controls,
   getConnectedEdges,
+  getIncomers,
   MiniMap,
   useEdgesState,
   useNodesState,
@@ -33,6 +34,7 @@ import CalculateNode from '../components/nodes/CalculateNode.jsx';
 import OperationNode from '../components/nodes/OperationNode.jsx';
 
 import './text-updater-node.css';
+import DoubleInputNode from '../components/nodes/CalculateNode.jsx';
 
 const rfStyle = {
   backgroundColor: '#8220a8',
@@ -88,12 +90,13 @@ const nodeTypes = {
   formulaNode: FormulaNode,
   operationNode: OperationNode,
   calculateNode: CalculateNode,
+  doubleInputNode: DoubleInputNode,
 };
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-export default function Formula() {
+export default function Calculator() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialNodes);
 
@@ -124,8 +127,13 @@ export default function Formula() {
     // console.log(node_values.join(' '));
     return node_values.join(' ');
   };
+  const handlePlay = () => {
+    const calculateNode = initialNodes[initialNodes.length - 1];
+    const incomingEdges = getIncomers(calculateNode, nodes, edges);
+    console.log(incomingEdges);
+  };
 
-  const handleClick = () => {
+  const handlePlays = () => {
     // console.log(initialNodes.find(node => node.id === connection.source).data.value);
     //console.log(initialNodes.find(node => node.id === 'calculate-node'));
     const mathString = callOtherFunction(nodes, edges);
@@ -146,7 +154,6 @@ export default function Formula() {
     // console.log(connectedEdges);
   };
 
-  const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   const onDragOver = useCallback((event) => {
@@ -157,12 +164,17 @@ export default function Formula() {
     (event) => {
       event.preventDefault();
 
-      const type = event.dataTransfer.getData('application/reactflow');
+      const type = event.dataTransfer.getData('application/reactflow.nodeType');
 
       // check if the dropped element is valid
       if (typeof type === 'undefined' || !type) {
         return;
       }
+
+      const name = event.dataTransfer.getData('application/reactflow.name');
+      const mathJsInfo = event.dataTransfer.getData(
+        'application/reactflow.mathJsInfo',
+      );
 
       // reactFlowInstance.project was renamed to reactFlowInstance.screenToFlowPosition
       // and you don't need to subtract the reactFlowBounds.left/top anymore
@@ -171,11 +183,12 @@ export default function Formula() {
         x: event.clientX,
         y: event.clientY,
       });
+
       const newNode = {
         id: getId(),
         type,
         position,
-        data: { label: `${type} node` },
+        data: { label: `${name}`, mathJsInfo: mathJsInfo },
       };
 
       setNodes((nds) => nds.concat(newNode));
@@ -185,7 +198,7 @@ export default function Formula() {
 
   return (
     <main className='flex flex-row'>
-      <Sidebar handlePlay={handleClick} />
+      <Sidebar handlePlay={handlePlay} />
       <div style={{ width: '100vw', height: '100vh' }}>
         <ReactFlow
           nodes={nodes}
