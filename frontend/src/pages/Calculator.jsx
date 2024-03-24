@@ -185,11 +185,8 @@ export default function Formula() {
 
   return (
     <main className='flex flex-row'>
-      <Sidebar />
+      <Sidebar handlePlay={handleClick} />
       <div style={{ width: '100vw', height: '100vh' }}>
-        <IconButton className='bg-white rounded' onClick={handleClick}>
-          <PlayArrowIcon />
-        </IconButton>
         <ReactFlow
           nodes={nodes}
           edges={edges}

@@ -15,7 +15,7 @@ const functions = [
   },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ handlePlay }) {
   const onDragStart = (event, nodeType) => {
     console.log(nodeType);
     event.dataTransfer.setData('application/reactflow', nodeType);
@@ -33,19 +33,18 @@ export default function Sidebar() {
         <IconButton className='bg-white rounded'>
           <SaveIcon />
         </IconButton>
-        <IconButton className='bg-white rounded'>
+        <IconButton className='bg-white rounded' onClick={handlePlay}>
           <PlayArrowIcon />
         </IconButton>
       </div>
       <Select className='w-full mt-10 bg-white' value={10}>
         <MenuItem value={10}>Values</MenuItem>
-        <MenuItem value={20}>Trig</MenuItem>
-        <MenuItem value={30}>Statistics</MenuItem>
+        <MenuItem value={20}>Functions</MenuItem>
       </Select>
       <div className='flex flex-col w-full mt-4 gap-4'>
         {functions.map((data) => (
           <Typography
-            key={data}
+            key={data.name}
             variant='body1'
             className='bg-white rounded w-full text-center py-4'
             onDragStart={(event) => onDragStart(event, data.name)}
