@@ -1,20 +1,27 @@
 import { IconButton, MenuItem, Select, Typography } from '@mui/material';
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import AddIcon from '@mui/icons-material/Add';
 import { Option } from '@mui/base/Option';
+import { useEdgesState, useNodesState } from 'reactflow';
 
 const functions = [
   { name: 'sin', type: 'number', value: '1' },
   {
     name: 'cos',
     type: 'function',
-    func: () => console.log('Called'),
+    func: 'cos()',
   },
 ];
 
 export default function Sidebar() {
+  const onDragStart = (event, nodeType) => {
+    console.log(nodeType);
+    event.dataTransfer.setData('application/reactflow', nodeType);
+    event.dataTransfer.effectAllowed = 'move';
+  };
+
   return (
     <section className={'p-10 w-full max-w-[250px] bg-[#757575] rounded'}>
       <div className='flex flex-row justify-between'>
@@ -40,7 +47,9 @@ export default function Sidebar() {
           <Typography
             key={data}
             variant='body1'
-            className='bg-white rounded w-full text-center py-4'>
+            className='bg-white rounded w-full text-center py-4'
+            onDragStart={(event) => onDragStart(event, data.name)}
+            draggable>
             {data.name}
           </Typography>
         ))}
