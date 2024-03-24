@@ -37,7 +37,7 @@ import './text-updater-node.css';
 import DoubleInputNode from '../components/nodes/CalculateNode.jsx';
 
 const rfStyle = {
-  backgroundColor: '#8220a8',
+  backgroundColor: '#C0E3E9',
 };
 
 const initialNodes = [

@@ -27,7 +27,7 @@ export default function Sidebar({ handlePlay }) {
   };
 
   return (
-    <section className={'p-10 w-full max-w-[250px] bg-[#757575] rounded'}>
+    <section className={'p-10 w-full max-w-[250px] bg-[#707070] rounded'}>
       <div className='flex flex-row justify-between'>
         <div>
           <IconButton className='bg-white rounded'>
