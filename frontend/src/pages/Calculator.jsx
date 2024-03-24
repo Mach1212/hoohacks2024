@@ -32,6 +32,10 @@ import {
 import FormulaNode from '../components/nodes/FormulaNode.jsx';
 import CalculateNode from '../components/nodes/CalculateNode.jsx';
 import OperationNode from '../components/nodes/OperationNode.jsx';
+import SinNode from '../components/nodes/SinNode.jsx';
+import OpenNode from '../components/nodes/Open.jsx';
+import CloseNode from '../components/nodes/Close.jsx';
+import CosNode from '../components/nodes/CosNode.jsx';
 
 import './text-updater-node.css';
 import DoubleInputNode from '../components/nodes/CalculateNode.jsx';
@@ -56,13 +60,13 @@ const initialNodes = [
   {
     id: 'formula-node-2',
     type: 'formulaNode',
-    position: { x: 0, y: 200 },
+    position: { x: 100, y: 200 },
     data: { value: 123 },
   },
   {
     id: 'calculate-node',
     type: 'calculateNode',
-    position: { x: 400, y: 50 },
+    position: { x: 400, y: 100 },
     data: { value: 'No Input Yet' },
   },
 ];
@@ -91,6 +95,10 @@ const nodeTypes = {
   operationNode: OperationNode,
   calculateNode: CalculateNode,
   doubleInputNode: DoubleInputNode,
+  sinNode: SinNode,
+  openNode: OpenNode,
+  closeNode: CloseNode,
+  cosNode: CosNode,
 };
 
 let id = 0;

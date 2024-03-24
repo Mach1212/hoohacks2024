@@ -7,10 +7,10 @@ import { Option } from '@mui/base/Option';
 import { useEdgesState, useNodesState } from 'reactflow';
 
 const functions = [
-  { name: 'sin', type: 'formulaNode', mathJsInfo: 'sin(first)' },
+  { name: 'sin', type: 'sinNode', mathJsInfo: 'sin(first)' },
   {
     name: 'cos',
-    type: 'formulaNode',
+    type: 'cosNode',
     mathJsInfo: 'cos($1)',
   },
   {
@@ -21,6 +21,16 @@ const functions = [
   {
     name: 'operation',
     type: 'operationNode',
+    mathJsInfo: 'cos($1)',
+  },
+  {
+    name: '(',
+    type: 'openNode',
+    mathJsInfo: 'cos($1)',
+  },
+  {
+    name: ')',
+    type: 'closeNode',
     mathJsInfo: 'cos($1)',
   },
 ];

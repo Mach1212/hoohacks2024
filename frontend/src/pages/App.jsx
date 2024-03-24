@@ -9,12 +9,12 @@ export default function App() {
   return (
     <div className='bg-[background] w-screen h-screen'>
       <Routes>
-        <Route path='/' element={<Navigate to='/overview' />} />
-        <Route path='/overview' element={<Overview />} />
+        <Route path='/' element={<Navigate to='/calculator' />} />
+        {/*<Route path='/overview' element={<Overview />} />*/}
         <Route path='/calculator' element={<Calculator />} />
-        <Route path='/controls' element={<AllControls />} />
-        <Route path='/flow' element={<Flow />} />
-        <Route path='/formula' element={<Formula />} />
+        {/*<Route path='/controls' element={<AllControls />} />*/}
+        {/*<Route path='/flow' element={<Flow />} />*/}
+        {/*<Route path='/formula' element={<Formula />} />*/}
       </Routes>
     </div>
   );
