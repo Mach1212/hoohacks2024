@@ -129,8 +129,37 @@ export default function Calculator() {
   };
   const handlePlay = () => {
     const calculateNode = initialNodes[initialNodes.length - 1];
-    const incomingEdges = getIncomers(calculateNode, nodes, edges);
-    console.log(incomingEdges);
+
+    const makeMathString = (node) => {
+      const incomingNodes = getIncomers(node, nodes, edges);
+      if (incomingNodes.length == 0) {
+        console.log(node.data.value);
+        return node.data.value.toString();
+      }
+      console.log(incomingNodes);
+
+      let mathString = incomingNodes
+        .map((node) => makeMathString(node))
+        .join(' ');
+      mathString = mathString.concat(node.data.value);
+      console.log(mathString);
+      return mathString;
+    };
+
+    const incomingNodes = getIncomers(calculateNode, nodes, edges);
+    const mathString = makeMathString(incomingNodes[0]);
+    console.log('Final mathstring');
+    console.log(mathString);
+
+    const solution = evaluate(mathString).toFixed(2);
+
+    // set the calculate result to the result of the math
+    initialNodes.find((node) => node.id === 'calculate-node').data.value =
+      solution;
+
+    document.getElementById('calculate-result').innerHTML = initialNodes.find(
+      (node) => node.id === 'calculate-node',
+    ).data.value;
   };
 
   const handlePlays = () => {
